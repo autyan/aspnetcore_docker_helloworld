@@ -5,10 +5,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["aspnetcore_docker_helloworld/aspnetcore_docker_helloworld.csproj", "aspnetcore_docker_helloworld/"]
-RUN dotnet restore "aspnetcore_docker_helloworld/aspnetcore_docker_helloworld.csproj"
+COPY ["aspnetcore_docker_helloworld.csproj", "./"]
+RUN dotnet restore "aspnetcore_docker_helloworld.csproj"
 COPY . .
-WORKDIR "/src/aspnetcore_docker_helloworld"
 RUN dotnet build "aspnetcore_docker_helloworld.csproj" -c Release -o /app/build
 
 FROM build AS publish
